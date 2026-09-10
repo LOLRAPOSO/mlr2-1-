@@ -14,7 +14,7 @@ Task* escolher_tarefa(Task tasks[], int n, int algoritmo) {
             melhor = &tasks[i];
         }
     }
-    return melhor;
+    return melhor;   
 }
 
 int ler_entrada(const char *path, Task tasks[], int *n, int *total_time) {
@@ -150,11 +150,9 @@ void simular(Task tasks[], int n, int total_time, int algoritmo, ResultadoSimula
         Task *escolhida = escolher_tarefa(tasks, n, algoritmo);
 
         if (escolhida != executando_atual) {
-            if (executando_atual != NULL) {
-                fechar_bloco(resultado, executando_atual, inicio_bloco, t, 'H');
-            }
+            fechar_bloco(resultado, executando_atual, inicio_bloco, t, 'H');
             inicio_bloco = t;
-            executando_atual = escolhida;
+            executando_atual = escolhida;  
         }
 
         if (escolhida != NULL) {
@@ -184,7 +182,7 @@ void fechar_bloco(ResultadoSimulacao *resultado, Task *tarefa, int inicio, int f
     BlocoExecucao *b = &resultado->blocos[resultado->n_blocos];
 
     if (tarefa == NULL) {
-        strcpy(b->nome, "idle");
+        strcpy(b->nome, "idle");   
     } else {
         strncpy(b->nome, tarefa->nome, MAX_NOME - 1);
         b->nome[MAX_NOME - 1] = '\0';
@@ -212,7 +210,7 @@ int gravar_saida(const char *algoritmo_nome, Task tasks[], int n, ResultadoSimul
     for (int i = 0; i < resultado->n_blocos; i++) {
         BlocoExecucao *b = &resultado->blocos[i];
         if (strcmp(b->nome, "idle") == 0) {
-            fprintf(f, "idle for %d units\n", b->duration);
+            fprintf(f, "idle for %d units\n", b->duration);  
         } else {
             fprintf(f, "[%s] for %d units - %c\n", b->nome, b->duration, b->motivo);
         }
