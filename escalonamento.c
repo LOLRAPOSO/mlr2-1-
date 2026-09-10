@@ -2,6 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include "escalonamento.h"
+#include <ctype.h>
+
+#define LOGIN "mlr2"
+
+Task* escolher_tarefa(Task tasks[], int n, int algoritmo) {
+    Task *melhor = NULL;
+    for (int i = 0; i < n; i++) {
+        if (tasks[i].remaining <= 0) continue;
+        if (melhor == NULL || maior_prioridade(&tasks[i], melhor, algoritmo)) {
+            melhor = &tasks[i];
+        }
+    }
+    return melhor;
+}
 
 int ler_entrada(const char *path, Task tasks[], int *n, int *total_time) {
     FILE *f = fopen(path, "r");
