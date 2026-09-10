@@ -83,17 +83,6 @@ int ler_entrada(const char *path, Task tasks[], int *n, int *total_time) {
         count++;
     }
 
-    int maior_prioridade(Task *a, Task *b, int algoritmo) {
-        if (algoritmo == 0) { 
-            if (a->period != b->period)
-                return a->period < b->period;
-        } else { 
-            if (a->abs_deadline != b->abs_deadline)
-                return a->abs_deadline < b->abs_deadline;
-        }
-        return a->posicao < b->posicao;
-    }
-
     if (count == 0) {
         fprintf(stderr, "Erro: nenhuma tarefa encontrada no arquivo\n");
         fclose(f);
@@ -103,6 +92,17 @@ int ler_entrada(const char *path, Task tasks[], int *n, int *total_time) {
     *n = count;
     fclose(f);
     return 0;
+}
+
+int maior_prioridade(Task *a, Task *b, int algoritmo) {
+    if (algoritmo == 0) { 
+        if (a->period != b->period)
+            return a->period < b->period;
+    } else { 
+        if (a->abs_deadline != b->abs_deadline)
+            return a->abs_deadline < b->abs_deadline;
+    }
+    return a->posicao < b->posicao;
 }
 
 void simular(Task tasks[], int n, int total_time, int algoritmo, ResultadoSimulacao *resultado) {
