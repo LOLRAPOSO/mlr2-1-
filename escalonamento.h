@@ -15,6 +15,7 @@ typedef struct task {
     int abs_deadline;
     int completed_count;
     int lost_count;
+    int killed_count;
 }Task;
 
 #endif
